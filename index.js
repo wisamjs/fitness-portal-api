@@ -1,18 +1,23 @@
 const koa = require('koa');
 const route = require('koa-route');
+var bodyParser = require('koa-bodyparser');
 const app = new koa();
 
-const monk = require('monk');
-const mongoUrl = require('./config').mongoUrl;
-const db = monk(mongoUrl);
-const exercises = db.get('exercises');
+const routes = require('./src/routes/routes');
 
-const list = async (ctx) => {
-  const res = await exercises.find({});
-  ctx.body = res;
-}
+app.use(bodyParser());
+app.use(route.get('/exercises', routes.exercises.list));
+app.use(route.get('/exercises/name/:name', routes.exercises.findByName));
+app.use(route.get('/exercises/id/:id', routes.exercises.findByName));
+app.use(route.post('/exercise/', routes.exercises.add));
 
-app.use(route.get('/exercises', list));
+app.use(route.get('/dates', routes.dates.list));
+app.use(route.post('/dates', routes.dates.add));
 
-app.listen(3002);
+app.use(route.get('/workingSets', routes.workingSets.list));
+app.use(route.post('/workingSets', routes.workingSets.add));
 
+app.use(route.get('/workouts', routes.workouts.list));
+app.use(route.post('/workouts', routes.workouts.add));
+
+app.listen(8080);
