@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "7.10"
+  },
   "scripts": {
     "start": "NODE_ENV=production node ./index.js",
     "populate": "node src/utils/populate.js",
