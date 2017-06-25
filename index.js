@@ -20,4 +20,4 @@ app.use(route.post('/workingSets', routes.workingSets.add));
 app.use(route.get('/workouts', routes.workouts.list));
 app.use(route.post('/workouts', routes.workouts.add));
 
-app.listen(8080);
+app.listen(process.env.PORT || 8080);
