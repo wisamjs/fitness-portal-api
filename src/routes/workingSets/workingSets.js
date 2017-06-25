@@ -1,7 +1,7 @@
 module.exports = function() {
 
 	const monk = require('monk');
-	const mongoUrl = require('../../../config').mongoUrl;
+	const mongoUrl = process.env.mongoUrl;
 	const db = monk(mongoUrl);
 	const collection = db.get('workingSets');
 
