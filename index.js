@@ -1,5 +1,4 @@
 const koa = require('koa');
-const route = require('koa-route');
 const router = require('koa-router')();
 var bodyParser = require('koa-bodyparser');
 const app = new koa();
@@ -13,23 +12,19 @@ const CORS = async (ctx, next) => {
 
 app.use(bodyParser());
 
+// Will refactor later
 router.use('*', CORS);
 router.get('/workouts', routes.workouts.list);
+router.get('/exercises', routes.exercises.list);
+router.get('/exercises/name/:name', routes.exercises.findByName);
+router.get('/exercises/id/:id', routes.exercises.findByName);
+router.post('/exercise/', routes.exercises.add);
+router.get('/dates', routes.dates.list);
+router.post('/dates', routes.dates.add);
+router.get('/workingSets', routes.workingSets.list);
+router.post('/workingSets', routes.workingSets.add);
+
 app.use(router.routes());
 app.use(router.allowedMethods());
-
-// app.use(route.get('/exercises', routes.exercises.list));
-// app.use(route.get('/exercises/name/:name', routes.exercises.findByName));
-// app.use(route.get('/exercises/id/:id', routes.exercises.findByName));
-// app.use(route.post('/exercise/', routes.exercises.add));
-
-// app.use(route.get('/dates', routes.dates.list));
-// app.use(route.post('/dates', routes.dates.add));
-
-// app.use(route.get('/workingSets', routes.workingSets.list));
-// app.use(route.post('/workingSets', routes.workingSets.add));
-
-// app.use(route.get('/workouts', routes.workouts.list));
-// app.use(route.post('/workouts', routes.workouts.add));
 
 app.listen(process.env.PORT || 8080);
