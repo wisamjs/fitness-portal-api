@@ -23,6 +23,10 @@ router.get('/dates', routes.dates.list);
 router.post('/dates', routes.dates.add);
 router.get('/workingSets', routes.workingSets.list);
 router.post('/workingSets', routes.workingSets.add);
+router.get('/levels', routes.levels.list);
+router.post('/levels', routes.levels.add);
+router.get('/standards', routes.standards.list);
+router.post('/standards', routes.standards.add);
 
 app.use(router.routes());
 app.use(router.allowedMethods());
